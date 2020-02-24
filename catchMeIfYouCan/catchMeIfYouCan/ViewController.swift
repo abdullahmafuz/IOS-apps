@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import AVFoundation
+
+
+class MyTapGestureRecognizer: UITapGestureRecognizer {
+    var img = UIImageView()
+}
 
 class ViewController: UIViewController {
     
@@ -33,30 +39,45 @@ class ViewController: UIViewController {
     var timerHidder = Timer()
     
     var jerryArr = [UIImageView]()
+    
+    var audioPlayer : AVAudioPlayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        //sound
+        let sound = Bundle.main.url(forResource: "punch", withExtension: "mp3")
+          
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: sound!)
+        
+        } catch {
+            print("audio file error")
+        }
+        
         
                jerryArr = [jerry1,jerry2,jerry3,jerry4,jerry5,jerry6,jerry7,jerry8,jerry9]
         
         let storeHighScore = UserDefaults.standard.object(forKey: "highScore")
         
         if storeHighScore != nil {
-            highscore.text = "HighScore : \(storeHighScore ?? "")"
+            highscore.text = "HighestScore : \(storeHighScore ?? "")"
             highScoreCount = storeHighScore as! Int
         }else{
-             highscore.text = "HighScore : 0"
+             highscore.text = "HighestScore : 0"
         }
         
-        score.text = "Score : \(scoreCount )"
+        score.text = "Your score : \(scoreCount )"
         
        // Tap Gesture for each handler
         // adding Gesture for each jerry imageview
      
         for jerry in jerryArr {
             
-            jerry.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(incScore)))
-            
+            let gestureRecognizer = MyTapGestureRecognizer(target: self, action: #selector(incScore))
+                jerry.addGestureRecognizer(gestureRecognizer)
+            gestureRecognizer.img = jerry
         }
         
         // enabling interactive in each imageview
@@ -73,16 +94,41 @@ class ViewController: UIViewController {
         time = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(decreaseTimeCount), userInfo: nil, repeats: true)
         
         
-        timerHidder = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector:#selector(hideImage), userInfo: nil, repeats: true)
+        timerHidder = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector:#selector(hideImage), userInfo: nil, repeats: true)
         
     }
     
-    @objc func incScore (){
+    // increase the score
+    @objc func incScore (gestureRecognizer: MyTapGestureRecognizer){
         
         scoreCount += 1
-        score.text = "Score : \(scoreCount)"
+        score.text = "Your score : \(scoreCount)"
+        gestureRecognizer.img.image = UIImage(named:"jerry_sad")
+        
+      
+
+        
+
+        audioPlayer?.play()
+        
+        self.view.backgroundColor = UIColor(red:1.00, green:0.45, blue:0.45, alpha:1.0)
+        timer.textColor = UIColor.white
+        score.textColor = UIColor.white
+        highscore.textColor = UIColor.white
+      
+        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (Timer) in
+            self.view.backgroundColor = UIColor.white
+            self.timer.textColor = UIColor.black
+            self.score.textColor = UIColor.black
+            self.highscore.textColor = UIColor.black
+            
+            gestureRecognizer.img.image = UIImage(named:"jerry")
+        }
+        
         
     }
+    
+    // hide all image init
     @objc func hideImage(){
         
         for jerry in jerryArr {
@@ -95,10 +141,14 @@ class ViewController: UIViewController {
         
     }
     
+    
+    // decrease time counting (9,8,7,6 ....) with are functionality
     @objc func decreaseTimeCount (){
         
         timeCount -= 1
         timer.text = String(timeCount)
+        
+        
         
         if timeCount == 0 {
             
@@ -131,7 +181,7 @@ class ViewController: UIViewController {
                 // try agian function code here
                 self.timeCount = 30
                 self.scoreCount = 0
-                self.score.text = "Score : \(self.scoreCount)"
+                self.score.text = "Your score : \(self.scoreCount)"
                 self.timer.text = "30"
                 self.time = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.decreaseTimeCount), userInfo: nil, repeats: true)
                        
