@@ -9,6 +9,8 @@
 import UIKit
 
 class detailViewController: UIViewController {
+    
+    var selectedmansion : Mansion?
 
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -16,7 +18,10 @@ class detailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        nameLabel.text = selectedmansion?.name
+        titleLabel.text = "Price : \(selectedmansion?.price ?? "")"
+        imgView.image = selectedmansion?.img
+        
     }
     
 

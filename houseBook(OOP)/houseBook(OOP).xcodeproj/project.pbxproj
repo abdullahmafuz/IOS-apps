@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A55381422403C42700F89092 /* mansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55381412403C42700F89092 /* mansion.swift */; };
 		A5E5EEC52402B940005B9ABF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5EEC42402B940005B9ABF /* AppDelegate.swift */; };
 		A5E5EEC72402B940005B9ABF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5EEC62402B940005B9ABF /* SceneDelegate.swift */; };
 		A5E5EEC92402B940005B9ABF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5EEC82402B940005B9ABF /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A55381412403C42700F89092 /* mansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mansion.swift; sourceTree = "<group>"; };
 		A5E5EEC12402B940005B9ABF /* houseBook(OOP).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "houseBook(OOP).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E5EEC42402B940005B9ABF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5E5EEC62402B940005B9ABF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				A5E5EEC82402B940005B9ABF /* ViewController.swift */,
 				A5E5EED82402BB16005B9ABF /* detailViewController.swift */,
 				A5E5EECA2402B940005B9ABF /* Main.storyboard */,
+				A55381412403C42700F89092 /* mansion.swift */,
 				A5E5EECD2402B942005B9ABF /* Assets.xcassets */,
 				A5E5EECF2402B942005B9ABF /* LaunchScreen.storyboard */,
 				A5E5EED22402B943005B9ABF /* Info.plist */,
@@ -143,6 +146,7 @@
 			files = (
 				A5E5EEC92402B940005B9ABF /* ViewController.swift in Sources */,
 				A5E5EEC52402B940005B9ABF /* AppDelegate.swift in Sources */,
+				A55381422403C42700F89092 /* mansion.swift in Sources */,
 				A5E5EEC72402B940005B9ABF /* SceneDelegate.swift in Sources */,
 				A5E5EED92402BB16005B9ABF /* detailViewController.swift in Sources */,
 			);
