@@ -15,6 +15,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     var nameArr = [String]()
     var idArr = [UUID]()
+    var selectedName = ""
+    var selectedId : UUID?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +27,24 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         getData()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(getData), name: NSNotification.Name(rawValue: "updatedData"), object: nil)
+
+       
+    
+    }
 
 
     @objc func onBtnClick (){
+        selectedName = ""
         performSegue(withIdentifier: "toDetailVC", sender: nil)
     }
     
-    func getData (){
+    @objc func getData (){
+        
+        nameArr.removeAll(keepingCapacity: false)
+        idArr.removeAll(keepingCapacity: false)
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -58,6 +71,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             print("errrorrr")
         }
         
+        table.reloadData()
+        
     }
     
     
@@ -66,11 +81,90 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         tbCell.textLabel?.text = nameArr[indexPath.row]
         
+
+        
         return tbCell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
         return nameArr.count
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "toDetailVC" {
+            
+            let destinationVC = segue.destination as! detailVC
+                destinationVC.choosenname = selectedName
+            destinationVC.choosenId = selectedId
+            
+            
+            
+        }
+        
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        selectedName = nameArr[indexPath.row]
+        selectedId = idArr[indexPath.row]
+        
+        performSegue(withIdentifier: "toDetailVC", sender: nil)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        
+        
+        
+        if editingStyle == .delete {
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            let context = appDelegate.persistentContainer.viewContext
+            
+            let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Gallery")
+            
+            let deletedItem = idArr[indexPath.row].uuidString
+            
+            fetchReq.predicate = NSPredicate(format: "id = %@", deletedItem)
+            
+            fetchReq.returnsObjectsAsFaults = false
+            
+            
+            do{
+                
+                let results = try context.fetch(fetchReq)
+                
+                if results.count > 0 {
+                    for res in results as! [NSManagedObject]{
+                        if let id = res.value(forKey: "id") as? UUID{
+                            
+                            if id == idArr[indexPath.row]{
+                                context.delete(res)
+                                nameArr.remove(at: indexPath.row)
+                                idArr.remove(at: indexPath.row)
+                                
+                                self.table.reloadData()
+                                do {
+                                    try context.save()
+                                } catch  {
+                                   
+                                    print("error")
+                                }
+                                break
+                            }
+                            
+                        }
+                    }
+                }
+                
+            }catch{
+                
+            }
+            
+        }
         
     }
     

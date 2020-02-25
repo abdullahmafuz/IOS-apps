@@ -43,7 +43,7 @@
         <scene sceneID="H98-8s-KRX">
             <objects>
                 <viewController id="Foy-XS-CdP" customClass="detailVC" customModule="imgGallary" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="CFO-yB-dxi" customClass="deta">
+                    <view key="view" contentMode="scaleToFill" id="CFO-yB-dxi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
