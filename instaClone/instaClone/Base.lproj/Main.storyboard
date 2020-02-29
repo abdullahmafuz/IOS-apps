@@ -154,22 +154,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upload" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rR-c3-TaQ">
-                                <rect key="frame" x="186" y="328" width="55" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectImg" translatesAutoresizingMaskIntoConstraints="NO" id="LrC-bw-c70">
+                                <rect key="frame" x="20" y="124" width="374" height="227"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="comment" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGK-J9-h9E">
+                                <rect key="frame" x="20" y="431" width="362" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="pxu-pE-IPy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lBx-CP-LgO">
+                                <rect key="frame" x="129" y="562" width="144" height="81"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="81" id="qdy-ru-RM8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="39"/>
+                                <state key="normal" title="Upload"/>
+                                <connections>
+                                    <action selector="uploadEvent:" destination="MV1-oV-384" eventType="touchUpInside" id="W0w-gx-6Dw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="LrC-bw-c70" firstAttribute="leading" secondItem="XPV-lL-xuz" secondAttribute="leadingMargin" id="1IQ-sD-OcV"/>
+                            <constraint firstItem="3GB-C7-ZmF" firstAttribute="trailing" secondItem="cGK-J9-h9E" secondAttribute="trailing" constant="32" id="Ju6-nv-FKB"/>
+                            <constraint firstItem="lBx-CP-LgO" firstAttribute="leading" secondItem="3GB-C7-ZmF" secondAttribute="leading" constant="129" id="Q0Y-cr-hhR"/>
+                            <constraint firstItem="LrC-bw-c70" firstAttribute="leading" secondItem="cGK-J9-h9E" secondAttribute="leading" id="XFO-Ke-7km"/>
+                            <constraint firstItem="LrC-bw-c70" firstAttribute="trailing" secondItem="XPV-lL-xuz" secondAttribute="trailingMargin" id="Zl7-WA-YpO"/>
+                            <constraint firstItem="cGK-J9-h9E" firstAttribute="centerX" secondItem="lBx-CP-LgO" secondAttribute="centerX" id="ga1-D5-kXR"/>
+                            <constraint firstItem="lBx-CP-LgO" firstAttribute="top" secondItem="cGK-J9-h9E" secondAttribute="bottom" constant="95" id="kWV-WK-U2h"/>
+                            <constraint firstItem="LrC-bw-c70" firstAttribute="top" secondItem="3GB-C7-ZmF" secondAttribute="top" constant="80" id="lUE-fc-FQu"/>
+                            <constraint firstItem="cGK-J9-h9E" firstAttribute="top" secondItem="LrC-bw-c70" secondAttribute="bottom" constant="80" id="pKa-pk-eks"/>
+                            <constraint firstItem="3GB-C7-ZmF" firstAttribute="bottom" secondItem="lBx-CP-LgO" secondAttribute="bottom" constant="170" id="yi3-gf-ipv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="3GB-C7-ZmF"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Upload" id="dwf-gq-A6k"/>
+                    <tabBarItem key="tabBarItem" title="Upload" selectedImage="u.circle.fill" catalog="system" id="dwf-gq-A6k"/>
+                    <connections>
+                        <outlet property="commentTx" destination="cGK-J9-h9E" id="xHD-Uz-Vrz"/>
+                        <outlet property="imageView" destination="LrC-bw-c70" id="s1t-dX-xjy"/>
+                        <outlet property="uploadBtn" destination="lBx-CP-LgO" id="F5G-Jg-2RZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WmP-oA-39F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2649" y="537"/>
+            <point key="canvasLocation" x="2647.826086956522" y="536.38392857142856"/>
         </scene>
         <!--Setting-->
         <scene sceneID="T5Y-sP-bnc">
@@ -206,7 +238,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wos-qi-SbG"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Setting" id="3hH-A9-Fbt"/>
+                    <tabBarItem key="tabBarItem" title="Setting" selectedImage="square.grid.2x2" catalog="system" id="3hH-A9-Fbt"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="toMainVC" modalPresentationStyle="fullScreen" id="fJZ-Y3-PbC"/>
                     </connections>
@@ -234,7 +266,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="j09-iS-7yA"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Feed" id="TwM-G7-uyu"/>
+                    <tabBarItem key="tabBarItem" title="Feed" selectedImage="flame" catalog="system" id="TwM-G7-uyu"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rbR-cJ-ofs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -261,6 +293,12 @@
             <point key="canvasLocation" x="1519" y="1"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="flame" catalog="system" width="54" height="64"/>
+        <image name="selectImg" width="225" height="225"/>
+        <image name="square.grid.2x2" catalog="system" width="64" height="56"/>
+        <image name="u.circle.fill" catalog="system" width="64" height="60"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iWm-3M-kmv"/>
     </inferredMetricsTieBreakers>
